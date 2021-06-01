@@ -10,21 +10,18 @@ source:
 
 build:
   number: 1
+  noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
-    - setuptools_scm >=3.4.1
-    # setuptools_scm[toml]
-    - toml
+    - wheel
+    - setuptools
   run:
-    - python
-    - pathlib2  # [py27]
-    - typing  # [py<35]
-    - zipp >=0.4  # [py<38]
-    - singledispatch  # [py<34]
+    - python >=3.6
+    - zipp >=3.1.0
     - importlib_metadata  # [py<38]
 
 test:
@@ -36,10 +33,13 @@ test:
     - importlib_resources
 
 about:
-  home: http://importlib-resources.readthedocs.io
+  home: https://github.com/python/importlib_resources
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
   summary: Backport of Python 3.7's standard library `importlib.resources`
+  doc_url: https://importlib-resources.readthedocs.io
+  dev_url: https://github.com/python/importlib_resources
 
 extra:
   recipe-maintainers:
