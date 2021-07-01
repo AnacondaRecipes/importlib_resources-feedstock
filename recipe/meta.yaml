@@ -18,7 +18,10 @@ requirements:
     - python >=3.6
     - pip
     - wheel
-    - setuptools
+    - setuptools >=42
+    # setuptools_scm[toml] from upstream source
+    - setuptools_scm >=3.4.1
+    - toml
   run:
     - python >=3.6
     - zipp >=3.1.0
