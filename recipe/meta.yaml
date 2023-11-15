@@ -60,7 +60,6 @@ about:
   summary: Backport of Python 3.7's standard library `importlib.resources`
 
 extra:
-  feedstock-name: importlib_resources
   anaconda-services:
     ref: https://anaconda.zendesk.com/agent/tickets/42309
     reason: Carl Zeiss ask
