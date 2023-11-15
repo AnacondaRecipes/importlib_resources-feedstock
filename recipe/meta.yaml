@@ -11,7 +11,7 @@ source:
 build:
   number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
 
 requirements:
   host:
@@ -61,5 +61,10 @@ about:
 
 extra:
   feedstock-name: importlib_resources
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/42309
+    reason: Dependency for asdf package
   recipe-maintainers:
+    - ianaobi
+    - bradley
     - ocefpaf
