@@ -3,5 +3,8 @@ aggregate_check: false
 
 upload_without_merge: true
 
+upload_channels:
+  - services
+
 channels:
   - services
