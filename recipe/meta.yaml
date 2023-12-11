@@ -2,7 +2,7 @@
 {% set version = "6.1.1" %}
 
 package:
-  name: {{ name }}
+  name: {{ name }}-suite
   version: {{ version }}
 
 source:
@@ -14,7 +14,7 @@ build:
   skip: true  # [py<38]
 
 outputs:
-  - name: {{ name }}
+  - name: importlib_resources
     script: install.sh   # [unix]
     script: install.bat  # [win]
     requirements:
@@ -43,6 +43,8 @@ outputs:
     requirements:
       host: 
         - python
+        - setuptools
+        - wheel
       run:
         - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
         - python
