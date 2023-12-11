@@ -12,28 +12,47 @@ source:
 build:
   number: 0
   skip: true  # [py<38]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
-requirements:
-  host:
-    - python
-    - pip
-    - setuptools
-    - setuptools_scm >=3.4.1
-    # setuptools_scm[toml]
-    - toml
-    - wheel
-  run:
-    - python
-    - zipp >=3.1.0  # [py<310]
+outputs:
+  - name: {{ name }}
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    requirements:
+      host:
+        - python
+        - pip
+        - setuptools
+        - setuptools_scm >=3.4.1
+        # setuptools_scm[toml]
+        - toml
+        - wheel
+      run:
+        - python
+        - zipp >=3.1.0  # [py<310]
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+      imports:
+        - importlib_resources
 
-test:
-  requires:
-    - pip
-  commands:
-    - pip check
-  imports:
-    - importlib_resources
+  - name: importlib-resources
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    requirements:
+      host: 
+        - python
+      run:
+        - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
+        - python
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+      imports:
+        - importlib_resources
 
 about:
   home: https://importlib-resources.readthedocs.io
