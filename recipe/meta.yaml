@@ -43,11 +43,15 @@ outputs:
     requirements:
       host: 
         - python
+        - pip
         - setuptools
+        - setuptools_scm >=3.4.1
+        # setuptools_scm[toml]
+        - toml
         - wheel
       run:
-        - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
         - python
+        - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
     test:
       requires:
         - pip
