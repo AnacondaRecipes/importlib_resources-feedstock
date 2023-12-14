@@ -38,17 +38,11 @@ outputs:
         - importlib_resources
 
   - name: importlib-resources
-    script: install.sh   # [unix]
-    script: install.bat  # [win]
+    build:
+      noarch: python
     requirements:
       host: 
         - python
-        - pip
-        - setuptools
-        - setuptools_scm >=3.4.1
-        # setuptools_scm[toml]
-        - toml
-        - wheel
       run:
         - python
         - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
