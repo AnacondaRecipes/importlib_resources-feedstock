@@ -45,7 +45,7 @@ outputs:
         - python
       run:
         - python
-        - {{ pin_subpackage("importlib_resources", max_pin="x.x.x", exact=True) }}
+        - {{ pin_subpackage("importlib_resources", max_pin="x.x.x") }}
     test:
       requires:
         - pip
