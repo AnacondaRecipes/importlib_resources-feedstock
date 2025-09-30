@@ -1,13 +1,13 @@
 {% set name = "importlib_resources" %}
-{% set version = "6.4.0" %}
+{% set version = "6.5.2" %}
 
 package:
   name: {{ name }}-suite
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cdb2b453b8046ca4e3798eb1d84f3cce1446a0e8e7b5ef4efb600f19fc398145
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 185f87adef5bcc288449d98fb4fba07cea78bc036455dd44c5fc4a2fe78fed2c
 
 build:
   number: 0
@@ -15,7 +15,7 @@ build:
 
 outputs:
   - name: importlib_resources
-    script: install.sh   # [unix]
+    script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
       host:
@@ -36,12 +36,11 @@ outputs:
         - pip check
       imports:
         - importlib_resources
-
   - name: importlib-resources
     build:
       noarch: python
     requirements:
-      host: 
+      host:
         - python
       run:
         - python
@@ -63,8 +62,8 @@ about:
   description: |
     importlib_resources is a backport of Python standard library importlib.resources module for older Pythons.
 
-    The key goal of this module is to replace parts of pkg_resources with a solution in Python's stdlib that 
-    relies on well-defined APIs. This makes reading resources included in packages easier, with more stable 
+    The key goal of this module is to replace parts of pkg_resources with a solution in Python's stdlib that
+    relies on well-defined APIs. This makes reading resources included in packages easier, with more stable
     and consistent semantics.
   dev_url: https://github.com/python/importlib_resources/
   doc_url: https://importlib-resources.readthedocs.io
