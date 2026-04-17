@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 outputs:
   - name: importlib_resources
@@ -21,9 +21,12 @@ outputs:
       host:
         - python
         - pip
-        - setuptools >=61.2
+        - setuptools >=77
         - setuptools_scm >=3.4.1
         - toml
+        # Upstream's pyproject.toml requires also "coherent.licensed" which is not available
+        # on main channel. It is only used, though, for obtaining license that is already
+        # present in pypi package.
       run:
         - python
         - zipp >=3.1.0  # [py<310]
@@ -34,7 +37,7 @@ outputs:
         - importlib_resources.readers
       requires:
         - pip
-        - pytest >=6
+        - pytest >=6,!= 8.1
         - zipp >=3.17.0
         - jaraco.test >=5.4
       commands:
@@ -62,13 +65,6 @@ outputs:
       commands:
         - pip check
         - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-
-test:
-  commands:
-    - pip check
-    - pip check
-  requires:
-    - pip
 
 about:
   home: https://importlib-resources.readthedocs.io
