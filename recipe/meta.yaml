@@ -1,5 +1,5 @@
 {% set name = "importlib_resources" %}
-{% set version = "6.5.2" %}
+{% set version = "7.1.0" %}
 
 package:
   name: {{ name }}-suite
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 185f87adef5bcc288449d98fb4fba07cea78bc036455dd44c5fc4a2fe78fed2c
+  sha256: 0722d4c6212489c530f2a145a34c0a7a3b4721bc96a15fada5930e2a0b760708
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 outputs:
   - name: importlib_resources
@@ -21,9 +21,12 @@ outputs:
       host:
         - python
         - pip
-        - setuptools >=61.2
+        - setuptools >=77
         - setuptools_scm >=3.4.1
         - toml
+        # Upstream's pyproject.toml requires also "coherent.licensed" which is not available
+        # on main channel. It is only used, though, for obtaining license that is already
+        # present in pypi package.
       run:
         - python
         - zipp >=3.1.0  # [py<310]
@@ -34,7 +37,7 @@ outputs:
         - importlib_resources.readers
       requires:
         - pip
-        - pytest >=6
+        - pytest >=6,!= 8.1
         - zipp >=3.17.0
         - jaraco.test >=5.4
       commands:
@@ -43,10 +46,8 @@ outputs:
         # AttributeError: module 'test.support.import_helper' has no attribute 'isolated_modules'
         # required for tests isolated_modules() function was added in Python 3.11
         - pytest --pyargs importlib_resources.tests  # [py>=311]
-  
   - name: importlib-resources
     build:
-      noarch: python
     requirements:
       host:
         - python
@@ -60,6 +61,7 @@ outputs:
         - importlib_resources.readers
       requires:
         - pip
+        - python
       commands:
         - pip check
         - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
