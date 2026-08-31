@@ -10,7 +10,7 @@ source:
   sha256: 0722d4c6212489c530f2a145a34c0a7a3b4721bc96a15fada5930e2a0b760708
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
 
 outputs:
@@ -46,6 +46,7 @@ outputs:
         # AttributeError: module 'test.support.import_helper' has no attribute 'isolated_modules'
         # required for tests isolated_modules() function was added in Python 3.11
         - pytest --pyargs importlib_resources.tests  # [py>=311]
+
   - name: importlib-resources
     build:
     requirements:
